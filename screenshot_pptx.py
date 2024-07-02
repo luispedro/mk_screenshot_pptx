@@ -5,8 +5,12 @@ import subprocess
 from time import sleep
 import tempfile
 
-NR_SLIDES = 3
+# Key to advance slides
 ADVANCE_SLIDE_KEY = 'J'
+# Output file name
+OUTPUT_NAME = 'Snowman.pptx'
+# Time to wait between slides (in seconds)
+SLIDE_DELAY = 1
 
 def get_screenshot(fname):
     subprocess.check_call(['scrot', '--monitor', '0', fname])
@@ -34,7 +38,7 @@ while True:
         im = mh.imread(cur)
         if prev is not None:
             if (prev == im).all():
-                print('End of presentation detected')
+                print('End of presentation detected (no change in screenshot)')
                 break
             slide = prs.slides.add_slide(blank_slide_layout)
         else:
@@ -43,7 +47,7 @@ while True:
         prev = im
 
     advance_slide()
-    sleep(.5)
-prs.save('Snowman.pptx')
+    sleep(SLIDE_DELAY)
 
-
+prs.save(OUTPUT_NAME)
+print(f'Saved to {OUTPUT_NAME}')
