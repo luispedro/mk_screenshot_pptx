@@ -28,7 +28,7 @@ for i in range(5):
     print(f'Starting in {5-i} seconds')
     sleep(1)
 
-prs = Presentation('empty_16x9.pptx')
+prs = Presentation('empty_16x10.pptx')
 blank_slide_layout = prs.slide_layouts[0]
 
 prev = None
